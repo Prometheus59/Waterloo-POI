@@ -1,4 +1,5 @@
-var model = [
+// Model
+var places = [
     {
         name: 'place1',
         lat: 111,

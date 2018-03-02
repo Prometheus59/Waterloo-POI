@@ -20,13 +20,22 @@
         <div class="filter">
             <input data-bind="textInput: search" />
         </div>
-        <div class="list"></div>
+        <div class="list">
+            <ul data-bind="foreach: places">
+                <li data-bind="text: name"></li>
+            </ul>
+        </div>
         <div class="map"></div>
     </div>
 
     <script src="javascript/knockout.js"></script>
     <script src="javascript/app.js"></script>
-    <script ko.applyBindings(viewModel);></script>
+    <script>
+        ko.applyBindings(viewModel)
+    </script>
+    <script>
+        ko.applyBindings(places)
+    </script>
 </body>
 
 </html>
