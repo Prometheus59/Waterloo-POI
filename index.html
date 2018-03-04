@@ -25,17 +25,18 @@
                 <li data-bind="text: name"></li>
             </ul>
         </div>
-        <div class="map"></div>
+
+        <div id="map">
+
+        </div>
     </div>
 
+    <!-- Scripts -->
     <script src="javascript/knockout.js"></script>
     <script src="javascript/app.js"></script>
-    <script>
-        ko.applyBindings(viewModel)
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDVwhi1k5rGVW_8KszK5XmR_eTdPAl7eg&v=3&callback=initMap">
     </script>
-    <script>
-        ko.applyBindings(places)
-    </script>
+
 </body>
 
 </html>
