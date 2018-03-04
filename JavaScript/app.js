@@ -44,18 +44,25 @@ function initMap() {
     bounds = new google.maps.LatLngBounds();
 }
 
+var Location = function(data){
+    var self = this;
+
+    self.name = data.name;
+    self.lat = data.lat;
+    self.lng = data.lng;
+}
+
 var viewModel = function() {
     initMap();
     var self = this;
-    this.search = ko.observable('');
-    this.list = ko.observableArray([]);
+    self.search = ko.observable('');
+    self.list = ko.observableArray([]);
 
     function updateList(locationItem) {
-        self.list.push(locationItem);
+        self.list.push(new Location(locationItem));
     }
-
     places.forEach(updateList)
-};  
+};
 
 function initApp() {
     ko.applyBindings(new viewModel());
