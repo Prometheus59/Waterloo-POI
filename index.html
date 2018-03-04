@@ -12,22 +12,26 @@
 
 <body>
 
-    <div class="header">
-        <h1>POI Waterloo</h1>
-        <h4>Interesting places near the University of Waterloo</h4>
-    </div>
-    <div class="app">
-        <div class="filter">
-            <input data-bind="textInput: search" />
+    <div class="left">
+        <div class="header">
+            <h1>POI Waterloo</h1>
+            <h4>Interesting places near the University of Waterloo</h4>
         </div>
-        <div class="list">
-            <ul data-bind="foreach: places">
-                <li data-bind="text: name"></li>
-            </ul>
-        </div>
+        <div class="app">
+            <div class="words">
+                <div class="filter">
+                    <input data-bind="textInput: search"/>
+                </div>
+                <div class="list">
+                    <ul data-bind="foreach: places">
+                        <li data-bind="text: name"></li>
+                    </ul>
+                </div>
+            </div>
 
-        <div id="map">
-            
+            <div id="map">
+
+            </div>
         </div>
     </div>
 
