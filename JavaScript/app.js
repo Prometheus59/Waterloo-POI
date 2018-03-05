@@ -44,7 +44,7 @@ function initMap() {
     bounds = new google.maps.LatLngBounds();
 }
 
-// location knockout object
+// location knockout observable
 var Location = function (data) {
     var self = this;
 
@@ -63,7 +63,6 @@ var viewModel = function () {
         self.list.push(new Location(locationItem));
     }
     places.forEach(updateList)
-
 
 };
 
