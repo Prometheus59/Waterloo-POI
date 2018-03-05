@@ -44,7 +44,8 @@ function initMap() {
     bounds = new google.maps.LatLngBounds();
 }
 
-var Location = function(data){
+// location knockout object
+var Location = function (data) {
     var self = this;
 
     self.name = data.name;
@@ -52,7 +53,7 @@ var Location = function(data){
     self.lng = data.lng;
 }
 
-var viewModel = function() {
+var viewModel = function () {
     initMap();
     var self = this;
     self.search = ko.observable('');
@@ -62,7 +63,10 @@ var viewModel = function() {
         self.list.push(new Location(locationItem));
     }
     places.forEach(updateList)
+
+
 };
+
 
 function initApp() {
     ko.applyBindings(new viewModel());

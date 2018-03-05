@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,10 +21,10 @@
         <div class="app">
             <div class="words">
                 <div class="filter">
-                    <input data-bind="textInput: search", placeholder="Filter"/>
+                    <input data-bind="textInput: search" , placeholder="Filter" />
                 </div>
-                <div class="list">
-                    <ul data-bind="foreach: places">
+                <div class="list" data-bind="with: viewModel">
+                    <ul data-bind="foreach: list">
                         <li data-bind="text: name"></li>
                     </ul>
                 </div>
