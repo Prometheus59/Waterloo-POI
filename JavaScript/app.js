@@ -68,7 +68,7 @@ var viewModel = function () {
     }
     places.forEach(updateList);
 
-
+    /*
     // filter using filter bar
     var filter = ko.computed(function () {
         var length = self.list().length; //Working
@@ -85,7 +85,10 @@ var viewModel = function () {
         }
         console.log("Completed");
     })
-    
+    */
+
+
+    // filter 1.1
 };
 
 
