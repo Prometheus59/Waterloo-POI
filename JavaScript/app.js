@@ -51,7 +51,10 @@ var Location = function (data) {
     self.name = data.name;
     self.lat = data.lat;
     self.lng = data.lng;
+    self.vision = ko.observable(1);
 }
+
+
 
 var viewModel = function () {
     initMap();
@@ -59,11 +62,30 @@ var viewModel = function () {
     self.search = ko.observable('');
     self.list = ko.observableArray([]);
 
+    // update and display list of places
     function updateList(locationItem) {
         self.list.push(new Location(locationItem));
     }
-    places.forEach(updateList)
+    places.forEach(updateList);
 
+
+    // filter using filter bar
+    var filter = ko.computed(function () {
+        var length = self.list().length; //Working
+
+        for (var i = 0; i < length; i++) {
+            var place = self.list()[i];
+            if (place.name.toLowerCase().includes(self.search().toLowerCase())) {
+                console.log("Filtered in " + place.name)
+                place.vision(1); //This 'probably' isn't working either
+            } else {
+                console.log("Filtered out " + place.name)
+                place.vision(0); // This isn't working TODO: change value to 0.
+            }
+        }
+        console.log("Completed");
+    })
+    
 };
 
 
