@@ -68,29 +68,11 @@ var viewModel = function () {
     }
     places.forEach(updateList);
 
-    /*
-    // filter using filter bar
-    var filter = ko.computed(function () {
-        var length = self.list().length; //Working
-
-        for (var i = 0; i < length; i++) {
-            var place = self.list()[i];
-            if (place.name.toLowerCase().includes(self.search().toLowerCase())) {
-                console.log("Filtered in " + place.name)
-                place.vision(1); //This 'probably' isn't working either
-            } else {
-                console.log("Filtered out " + place.name)
-                place.vision(0); // This isn't working TODO: change value to 0.
-            }
-        }
-        console.log("Completed");
-    })
-    */
-
 
     // filter 1.1
+    var filter = ko.computed(function () {
+    })
 };
-
 
 function initApp() {
     ko.applyBindings(new viewModel());
