@@ -14,18 +14,18 @@
 <body>
 
     <div class="left">
-       <!-- <div class="header">
-            <h1>POI Waterloo</h1> 
-            <h4>Interesting places near the University of Waterloo</h4> -->
+        <div class="header">
+            <h1>POI Waterloo</h1>
+            <h4>Interesting places near the University of Waterloo</h4>
         </div>
         <div class="app">
             <div class="words">
                 <div class="filter">
-                    <input data-bind="textInput: search" , placeholder="Filter", valueUpdate: 'afterkeydown'/>
+                    <input data-bind="textInput: search" , placeholder="filter" />
                 </div>
                 <div class="list" data-bind="with: viewModel">
                     <ul data-bind="foreach: list">
-                        <li data-bind="style: {visibility: vision() == 1 ? 'visible': 'hidden'} , text: name"></li>
+                        <li data-bind="visible: vision, text: name"></li>
                     </ul>
                 </div>
             </div>
