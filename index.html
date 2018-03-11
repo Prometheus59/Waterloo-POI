@@ -21,11 +21,11 @@
         <div class="app">
             <div class="words">
                 <div class="filter">
-                    <input data-bind="textInput: search" , placeholder="filter" />
+                    <input data-bind="textInput: search, valueUpdate: 'afterkeydown'" , placeholder="filter" />
                 </div>
-                <div class="list" data-bind="with: viewModel">
-                    <ul data-bind="foreach: list">
-                        <li data-bind="visible: vision, text: name"></li>
+                <div class="list">
+                    <ul data-bind="foreach: filteredList">
+                        <li data-bind="visible: setVisible, text: name"></li>
                     </ul>
                 </div>
             </div>
