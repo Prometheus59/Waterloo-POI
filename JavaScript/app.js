@@ -51,7 +51,7 @@ var Location = function (data) {
     self.name = data.name;
     self.lat = data.lat;
     self.lng = data.lng;
-    self.vision = ko.observable(1);
+    self.vision = ko.observable(true);
 }
 
 
@@ -71,6 +71,25 @@ var viewModel = function () {
 
     // filter 1.1
     var filter = ko.computed(function () {
+
+        var filtration = self.search().toLowerCase();
+
+        if (!filtration) {
+            //Show all list items since no filter is set
+            self.list().forEach(function(locationItem){
+                locationItem.vision(true); // This is being activated
+            });
+            console.log("Filter 1 completed");
+        } else {
+            //Filter list items according to search (http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html)
+            ko.utils.arrayFilter(self.list(), function(locationItem) {
+                var result = (locationItem.name.toLowerCase().includes(self.search().toLowerCase()));
+                locationItem.vision(result); // This is not triggering
+                console.log(result);
+                console.log(locationItem.name + " is " + locationItem.vision());
+            });
+            console.log("Filter 2 completed");
+        }
     })
 };
 
