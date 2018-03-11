@@ -51,7 +51,7 @@ var Location = function (data) {
     self.name = data.name;
     self.lat = data.lat;
     self.lng = data.lng;
-    self.vision = ko.observable(1);
+    self.setVisible = ko.observable(true);
 }
 
 
@@ -69,25 +69,22 @@ var viewModel = function () {
     places.forEach(updateList);
 
 
-    // filter using filter bar
-    var filter = ko.computed(function () {
-        var length = self.list().length; //Working
-
-        for (var i = 0; i < length; i++) {
+    // filter 1.1
+    this.filteredList = ko.computed(function () {
+        var result = [];
+        for (var i = 0; i < self.list().length; i++) {
             var place = self.list()[i];
-            if (place.name.toLowerCase().includes(self.search().toLowerCase())) {
-                console.log("Filtered in " + place.name)
-                place.vision(1); //This 'probably' isn't working either
+            if (place.name.toLowerCase().includes(this.search()
+                    .toLowerCase())) {
+                result.push(place);
+                self.list()[i].setVisible(true);
             } else {
-                console.log("Filtered out " + place.name)
-                place.vision(0); // This isn't working TODO: change value to 0.
+                self.list()[i].setVisible(false);
             }
         }
-        console.log("Completed");
-    })
-    
-};
-
+        return result;
+    }, this);
+}
 
 function initApp() {
     ko.applyBindings(new viewModel());
