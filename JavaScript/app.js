@@ -1,33 +1,34 @@
 // Location Model
 var places = [{
-        name: 'place1',
-        lat: 111,
-        lng: 111
+        name: 'Student Life Centre',
+        lat: 43.471753,
+        lng: -80.545351
     },
     {
-        name: 'place2',
-        lat: 222,
-        lng: 222
+        name: 'GoodLife Fitness Centre',
+        lat: 43.28484,
+        lng: -80.31129
     },
     {
-        name: 'place3',
-        lat: 333,
-        lng: 333
+        name: 'Walmart',
+        lat: 43.470582,
+        lng: -80.516222
     },
     {
-        name: 'place4',
-        lat: 444,
-        lng: 444
+        name: 'LCBO',
+        lat: 43.462545,
+        lng: -80.521887
     },
     {
-        name: 'place5',
-        lat: 444,
-        lng: 444
+        name: 'REV',
+        lat: 43.470705,
+        lng: -80.554095
     }
 ];
 
 // google maps initialization
 var map;
+
 function initMap() {
     // Default location
     var waterloo = {
@@ -44,15 +45,7 @@ function initMap() {
     bounds = new google.maps.LatLngBounds();
 }
 
-// location knockout observable
-var Location = function (data) {
-    var self = this;
 
-    self.name = data.name;
-    self.lat = data.lat;
-    self.lng = data.lng;
-    self.setVisible = ko.observable(true);
-}
 
 
 
@@ -62,28 +55,52 @@ var viewModel = function () {
     self.search = ko.observable('');
     self.list = ko.observableArray([]);
 
-    // update and display list of places
-    function updateList(locationItem) {
-        self.list.push(new Location(locationItem));
-    }
-    places.forEach(updateList);
+    // location knockout observable
+    function initMarkers(data) {
 
+        var location = {
+            setVisible: ko.observable(true),
+            marker: (function () {
+
+                var myLatLng = {
+                    lat: data.lat,
+                    lng: data.lng
+                };
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: data.name
+                })
+                return marker;
+            })()
+        };
+
+        self.list().push(location);
+    }
+
+    places.forEach(initMarkers);
+    console.log(self.list());
 
     // filter 1.1
     this.filteredList = ko.computed(function () {
+
         // filters the list, stores list in result, shows result
-        var result = [];
+
         for (var i = 0; i < self.list().length; i++) {
             var place = self.list()[i];
-            if (place.name.toLowerCase().includes(this.search()
+            console.log(place.marker.title);
+            console.log(place.setVisible());
+            if (place.marker.title.toLowerCase().includes(self.search()
                     .toLowerCase())) {
-                result.push(place);
-                self.list()[i].setVisible(true);
+                console.log(place);
+
+                place.setVisible(true);
             } else {
-                self.list()[i].setVisible(false);
+                place.setVisible(false);
             }
         }
-        return result;
+        console.log(self.list()[1].visible);
     }, this);
 }
 

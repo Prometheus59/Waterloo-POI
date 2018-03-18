@@ -24,8 +24,10 @@
                     <input data-bind="textInput: search, valueUpdate: 'afterkeydown'" , placeholder="filter" />
                 </div>
                 <div class="list">
-                    <ul data-bind="foreach: filteredList">
-                        <li data-bind="visible: setVisible, text: name"></li>
+                    <ul data-bind="foreach: list">
+                        <span data-bind="if: $data.setVisible">
+                        <li data-bind="text: $data.marker.title"></li>
+                    </span>
                     </ul>
                 </div>
             </div>
