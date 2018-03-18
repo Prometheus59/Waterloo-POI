@@ -46,9 +46,6 @@ function initMap() {
 }
 
 
-
-
-
 var viewModel = function () {
     initMap();
     var self = this;
@@ -75,12 +72,10 @@ var viewModel = function () {
                 return marker;
             })()
         };
-
         self.list().push(location);
     }
 
     places.forEach(initMarkers);
-    console.log(self.list());
 
     // filter 1.1
     this.filteredList = ko.computed(function () {
@@ -89,18 +84,14 @@ var viewModel = function () {
 
         for (var i = 0; i < self.list().length; i++) {
             var place = self.list()[i];
-            console.log(place.marker.title);
-            console.log(place.setVisible());
             if (place.marker.title.toLowerCase().includes(self.search()
                     .toLowerCase())) {
-                console.log(place);
 
                 place.setVisible(true);
             } else {
                 place.setVisible(false);
             }
         }
-        console.log(self.list()[1].visible);
     }, this);
 }
 
