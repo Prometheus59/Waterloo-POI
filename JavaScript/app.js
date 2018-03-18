@@ -28,7 +28,6 @@ var places = [{
 
 // google maps initialization
 var map;
-
 function initMap() {
     var waterloo = {
         lat: 43.4668,
@@ -71,6 +70,7 @@ var viewModel = function () {
 
     // filter 1.1
     this.filteredList = ko.computed(function () {
+        // filters the list, stores list in result, shows result
         var result = [];
         for (var i = 0; i < self.list().length; i++) {
             var place = self.list()[i];
