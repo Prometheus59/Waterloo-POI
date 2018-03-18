@@ -6,8 +6,8 @@ var places = [{
     },
     {
         name: 'GoodLife Fitness Centre',
-        lat: 43.28484,
-        lng: -80.31129
+        lat: 43.480750,
+        lng: -80.520274
     },
     {
         name: 'Walmart',
@@ -73,6 +73,7 @@ var viewModel = function () {
             })()
         };
         self.list().push(location);
+        console.log(location.marker.title);
     }
 
     places.forEach(initMarkers);
