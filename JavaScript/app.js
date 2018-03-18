@@ -29,6 +29,7 @@ var places = [{
 // google maps initialization
 var map;
 function initMap() {
+    // Default location
     var waterloo = {
         lat: 43.4668,
         lng: -80.51639
