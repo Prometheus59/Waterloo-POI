@@ -47,15 +47,16 @@ function initMap() {
 
 // Creates infoWindow and attaches to marker
 function initInfoWindow(marker) {
-
+/*
     var infoWindow = new google.maps.InfoWindow({
         content: marker.title
     })
+*/
 
     marker.addListener('click', function () {
+        infoWindow.setContent(marker.title);
         infoWindow.open(map, marker);
     });
-    console.log("Function 'initinfowindow' line 49 was called")
 }
 
 
@@ -123,12 +124,11 @@ var viewModel = function () {
 
     // allows list to be clickable
     self.openIW = function (location) {
+
         var marker = location.marker;
-        var infoWindow = new google.maps.InfoWindow({
-            content: marker.title
-        })
-        var map = location.marker.map;
-        infoWindow.open(map, marker)
+        var map = marker.map;
+        infoWindow.setContent(marker.title);
+        infoWindow.open(map, marker);
     }
 }
 
