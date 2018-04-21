@@ -45,6 +45,20 @@ function initMap() {
     bounds = new google.maps.LatLngBounds();
 }
 
+// Creates infoWindow and attaches to marker
+function initInfoWindow(marker) {
+
+    var infoWindow = new google.maps.InfoWindow({
+        content: marker.title
+    })
+
+    marker.addListener('click', function () {
+        infoWindow.open(map, marker);
+    });
+}
+
+
+
 
 var viewModel = function () {
     initMap();
@@ -59,6 +73,7 @@ var viewModel = function () {
             setVisible: ko.observable(true),
             marker: (function () {
 
+
                 var myLatLng = {
                     lat: data.lat,
                     lng: data.lng
@@ -69,6 +84,12 @@ var viewModel = function () {
                     map: map,
                     title: data.name
                 })
+
+                /*                 marker.addListener('click', function () {
+                                    infoWindow.open(map, marker);
+                                }); */
+
+                initInfoWindow(marker);
                 return marker;
             })()
         };
@@ -94,6 +115,11 @@ var viewModel = function () {
             }
         }
     }, this);
+
+    // allows list to be clickable
+    self.addInfoWindow = function (marker) {
+        infoWindow.open(map, marker);
+    }
 }
 
 function initApp() {
