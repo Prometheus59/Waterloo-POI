@@ -80,6 +80,7 @@ var viewModel = function () {
                     lng: data.lng
                 };
 
+
                 var marker = new google.maps.Marker({
                     position: myLatLng,
                     map: map,
@@ -111,8 +112,10 @@ var viewModel = function () {
                     .toLowerCase())) {
 
                 place.setVisible(true);
+                place.marker.setMap(map);
             } else {
                 place.setVisible(false);
+                place.marker.setMap(null);
             }
         }
     }, this);
