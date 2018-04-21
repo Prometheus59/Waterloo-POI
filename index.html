@@ -26,7 +26,7 @@
                 <div class="list">
                     <ul data-bind="foreach: list">
                         <span data-bind="if: $data.setVisible">
-                        <li data-bind="text: $data.marker.title, click: $parent.addInfoWindow"></li>
+                        <li data-bind="text: $data.marker.title, click: $parent.openIW"></li>
                     </span>
                     </ul>
                 </div>
