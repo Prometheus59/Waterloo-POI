@@ -45,21 +45,50 @@ function initMap() {
     bounds = new google.maps.LatLngBounds();
 }
 
-// Creates infoWindow and attaches to marker
+// Initializes infowindow with data
 function initInfoWindow(marker) {
-/*
-    var infoWindow = new google.maps.InfoWindow({
-        content: marker.title
-    })
-*/
+
+    var self = this;
+    this.lat = marker.getPosition().lat();
+    this.lng = marker.getPosition().lng();
+    var clientId = "UXTL0ME5FM14HX40LDSXO5OUOMJYRDOU1PDYECVGVYWZ1ETG";
+    var clientSecret = "YN2CEQJKAAU5W01O4VTPO0P3PYCKJ4QAGEJEEHPJO5DSLDX0";
+    var version = "20180425";
+    var foursquare_url = "https://api.foursquare.com/v2/venues/search?ll=" + this.lat + "," + this.lng + "&client_id=" + clientId + "&client_secret=" + clientSecret + "&query=" + marker.name + "&v=" + version;
+
+    $.getJSON(foursquare_url).done(function (data) {
+        var result = data.response.venues[0];
+
+      //  self.URL = result.url;
+        console.log(data.response.venues[0]);
+        self.name = marker.name;
+        self.address = result.location.formattedAddress[0] || 'No location provided';
+        self.city = result.location.formattedAddress[1] || 'No city provided';
+        try {
+            self.contact = result.contact.phone;
+        }
+        catch(err) {
+            self.contact = 'No phone number provided';
+        }
+       // self.contact = result.contact.phone || 'No phone number provided';
+    }).fail(function(){
+        alert("A problem has occurred with the foursquare api. Please refresh the page to continue.")
+    });
+
+    // Testing
+    console.log(self.name + " is self.name");
+    console.log(self.address + " is self.address");
+    console.log(self.city); //This is repeating --> Constantly shows rev
+
+
+    var content = "<div><b>" + self.name + "</b></div>" + "<div><b>" + self.address + "</b></div>" + "<div><b>" + self.city + "</b></div>" + "<div><b>" + self.contact + "</b></div>";
 
     marker.addListener('click', function () {
-        infoWindow.setContent(marker.title);
+        infoWindow.setContent(content);
         infoWindow.open(map, marker);
     });
+
 }
-
-
 
 
 var viewModel = function () {
@@ -87,10 +116,6 @@ var viewModel = function () {
                     map: map,
                     title: data.name
                 })
-
-                /*                 marker.addListener('click', function () {
-                                    infoWindow.open(map, marker);
-                                }); */
 
                 initInfoWindow(marker);
                 return marker;
@@ -123,6 +148,8 @@ var viewModel = function () {
 
 
     // allows list to be clickable
+    // May want to move to the other infowindow open section
+    // to allow for use of 'self.content(?)'
     self.openIW = function (location) {
 
         var marker = location.marker;
