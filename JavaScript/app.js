@@ -42,25 +42,33 @@ function initMap() {
     });
 
     infoWindow = new google.maps.InfoWindow();
-    bounds = new google.maps.LatLngBounds();
+    //bounds = new google.maps.LatLngBounds();
 }
 
+// Attaches listener to marker from initInfoWindow()
 function attachListener(marker, content){
     marker.addListener('click', function () {
         infoWindow.setContent(content);
         infoWindow.open(marker.map, marker);
     });
+
+    /*
+    var name = marker.title;
+
+    name.addListener('click', function () {
+        infoWindow.setContent(content);
+        infoWindow.open(marker.map, marker);
+    }); */
 }
 
 // Initializes infowindow with data
-// TODO: Self is causing all the options to be one location -> Need to change 'self' positioning
 function initInfoWindow(marker) {
 
     var self = this;
     this.lat = marker.getPosition().lat();
     this.lng = marker.getPosition().lng();
 
-    this.name = '';
+    this.name = marker.title;
     this.city = '';
     this.contact = '';
     this.address = '';
@@ -82,31 +90,25 @@ function initInfoWindow(marker) {
         }
         //self.address = result.location.formattedAddress[0] || 'No location provided';
         self.city = result.location.formattedAddress[1] || 'No city provided';
+
+        // See if this still works, can't seem to find any numbers
         try {
             self.contact = result.contact.phone;
         } catch (err) {
             self.contact = 'No phone number provided';
         }
 
-        // self.contact = result.contact.phone || 'No phone number provided';
-        /* console.log(self.name + " is self.name inside");
-        console.log(self.address + " is self.address inside");
-        console.log(self.city + " is self.city inside"); */
-        console.log(marker.title + " is the marker");
-
+        // Set content to be delivered to the attachListener function
         self.content = "<div><b>" + self.name + "</b></div>" + "<div><b>" + self.address + "</b></div>" + "<div><b>" + self.city + "</b></div>" + "<div><b>" + self.contact + "</b></div>";
 
+        // Make it so that initInfoWindow is called by attachListener to get the content string, thus 
+        // making the content string available to be used by openIW below.
         attachListener(marker, self.content);
 
+    // Error handling
     }).fail(function () {
         alert("A problem has occurred with the foursquare api. Please refresh the page to continue.")
     });
-
-    // Testing
-    /* console.log(self.name + " is self.name");
-    console.log(self.address + " is self.address");
-    console.log(self.city + " is self.city");
-    console.log("self.content is       : " + self.content); */
 
 }
 
@@ -170,14 +172,15 @@ var viewModel = function () {
     // allows list to be clickable
     // May want to move to the other infowindow open section
     // to allow for use of 'self.content(?)'
-    self.openIW = function (location) {
-
-        // TODO: Don't remake content, use other function.
-        // This should only open infoWindows
+    self.openIW = function(location) {
+        console.log("input is: " + location.marker.title)
         var marker = location.marker;
-        var map = marker.map;
-        infoWindow.setContent(marker.title);
-        infoWindow.open(map, marker);
+        // TODO: Don't remake content, use other function.
+        // This should only **open** infoWindows;
+        //infoWindow.setContent(location.marker.title);
+        //infoWindow.open(location.marker.map, location.marker);
+        //initInfoWindow(marker);
+        infoWindow.open(marker.map, marker);
     }
 }
 
