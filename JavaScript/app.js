@@ -62,18 +62,18 @@ function attachListener(marker, content) {
 function initInfoWindow(marker) {
 
     var self = this;
-    this.lat = marker.getPosition().lat();
-    this.lng = marker.getPosition().lng();
+    self.lat = marker.getPosition().lat();
+    self.lng = marker.getPosition().lng();
 
-    this.name = marker.title;
-    this.city = '';
-    this.contact = '';
-    this.address = '';
+    self.name = marker.title;
+    self.city = '';
+    self.contact = '';
+    self.address = '';
 
     var clientId = "UXTL0ME5FM14HX40LDSXO5OUOMJYRDOU1PDYECVGVYWZ1ETG";
     var clientSecret = "YN2CEQJKAAU5W01O4VTPO0P3PYCKJ4QAGEJEEHPJO5DSLDX0";
     var version = "20180429";
-    var foursquare_url = "https://api.foursquare.com/v2/venues/search?ll=" + this.lat + "," + this.lng + "&client_id=" + clientId + "&client_secret=" + clientSecret + "&query=" + marker.title + "&v=" + version;
+    var foursquare_url = "https://api.foursquare.com/v2/venues/search?ll=" + self.lat + "," + self.lng + "&client_id=" + clientId + "&client_secret=" + clientSecret + "&query=" + marker.title + "&v=" + version;
 
     // Reads the JSON response from foursquare, puts data into infowindow
     $.getJSON(foursquare_url).done(function (data) {
@@ -161,9 +161,9 @@ var viewModel = function () {
         var marker = location.marker;
         infoWindow.setContent(marker.title);
         infoWindow.open(marker.map, marker);
-        this.setAnimation(google.maps.Animation.BOUNCE);
+        marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
-            self.setAnimation(null);
+            marker.setAnimation(null);
         }, 1450);
     }
 }
