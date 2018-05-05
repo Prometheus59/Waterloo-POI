@@ -51,7 +51,7 @@ function attachListener(marker, content) {
         infoWindow.setContent(content);
         infoWindow.open(marker.map, marker);
         this.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function() {
+        setTimeout(function () {
             self.setAnimation(null);
         }, 1450);
     });
@@ -143,15 +143,9 @@ var viewModel = function () {
 
         for (var i = 0; i < self.list().length; i++) {
             var place = self.list()[i];
-            if (place.marker.title.toLowerCase().includes(self.search()
-                    .toLowerCase())) {
-
-                place.setVisible(true);
-                place.marker.setMap(map);
-            } else {
-                place.setVisible(false);
-                place.marker.setMap(null);
-            }
+            var match = place.marker.title.toLowerCase().includes(self.search().toLowerCase());
+            place.setVisible(match);
+            place.marker.setVisible(match);
         }
     }, this);
 
@@ -162,7 +156,7 @@ var viewModel = function () {
         infoWindow.setContent(marker.title);
         infoWindow.open(marker.map, marker);
         marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function() {
+        setTimeout(function () {
             marker.setAnimation(null);
         }, 1450);
     }
