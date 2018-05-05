@@ -45,12 +45,6 @@ body {
 }
 
 @media screen and (max-width: 450px){
-    #map {
-        width: 90%;
-    }
-    .words {
-        width: 90%;
-    }
     #toggle {
         display: inline;
     }
