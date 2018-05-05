@@ -81,9 +81,9 @@ function initInfoWindow(marker) {
         self.result = data.url;
         self.name = marker.title;
         try {
-            self.address = result.location.formattedAddress[0]
+            self.address = result.location.formattedAddress[0];
         } catch (err) {
-            'No location provided'
+            'No location provided';
         }
         self.city = result.location.formattedAddress[1] || 'No city provided';
 
@@ -94,7 +94,7 @@ function initInfoWindow(marker) {
 
         // Error handling
     }).fail(function () {
-        alert("A problem has occurred with the foursquare api. Please refresh the page to continue.")
+        alert("A problem has occurred with the foursquare api. Please refresh the page to continue.");
     });
 
 }
@@ -125,7 +125,7 @@ var viewModel = function () {
                     position: myLatLng,
                     map: map,
                     title: data.name
-                })
+                });
 
                 initInfoWindow(marker);
                 return marker;
@@ -159,8 +159,8 @@ var viewModel = function () {
         setTimeout(function () {
             marker.setAnimation(null);
         }, 1450);
-    }
-}
+    };
+};
 
 function initApp() {
     ko.applyBindings(new viewModel());
