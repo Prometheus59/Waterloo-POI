@@ -48,8 +48,13 @@ function initMap() {
 // Attaches listener to marker from initInfoWindow()
 function attachListener(marker, content) {
     marker.addListener('click', function () {
+        var self = this;
         infoWindow.setContent(content);
         infoWindow.open(marker.map, marker);
+        this.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function() {
+            self.setAnimation(null);
+        }, 1450);
     });
 
     /*
