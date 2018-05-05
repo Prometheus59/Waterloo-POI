@@ -13,28 +13,29 @@
 
 <body>
 
-    <div class="left">
-        <div class="header">
-            <h1>POI Waterloo</h1>
-            <h4> Places of interest near the University of Waterloo</h4>
+    <div class="header">
+        <div>
+            <a href="#" id="toggle">Toggle Filter</a>
         </div>
-        <div class="app">
-            <div class="words">
-                <div class="filter">
-                    <input data-bind="textInput: search, valueUpdate: 'afterkeydown'" , placeholder="filter" />
-                </div>
-                <div class="list">
-                    <ul data-bind="foreach: list">
-                        <span data-bind="if: $data.setVisible">
+        <h1>POI Waterloo</h1>
+        <h4> Places of interest near the University of Waterloo</h4>
+    </div>
+    <div class="app">
+        <div class="words">
+            <div class="filter">
+                <input data-bind="textInput: search, valueUpdate: 'afterkeydown'" , placeholder="  Filter" />
+            </div>
+            <div class="list">
+                <ul data-bind="foreach: list">
+                    <span data-bind="if: $data.setVisible">
                         <li data-bind="text: $data.marker.title, click: $parent.openIW"></li>
                     </span>
-                    </ul>
-                </div>
+                </ul>
             </div>
+        </div>
 
-            <div id="map">
+        <div id="map">
 
-            </div>
         </div>
     </div>
 
@@ -44,6 +45,7 @@
     <script src="javascript/app.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDVwhi1k5rGVW_8KszK5XmR_eTdPAl7eg&v=3&callback=initApp">
     </script>
+    <script src="JavaScript/mobile.js"></script>
 
 </body>
 

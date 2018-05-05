@@ -6,6 +6,10 @@
     flex-grow: 10;
 }
 
+#toggle {
+    display: none;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo|Patua+One');
 body {
     display: flex;
@@ -38,4 +42,16 @@ body {
     list-style-type: none;
     margin-top: 5vh;
     color: white;
+}
+
+@media screen and (max-width: 450px){
+    #map {
+        width: 90%;
+    }
+    .words {
+        width: 90%;
+    }
+    #toggle {
+        display: inline;
+    }
 }
