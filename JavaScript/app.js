@@ -46,7 +46,7 @@ function initMap() {
 }
 
 // Attaches listener to marker from initInfoWindow()
-function attachListener(marker, content){
+function attachListener(marker, content) {
     marker.addListener('click', function () {
         infoWindow.setContent(content);
         infoWindow.open(marker.map, marker);
@@ -105,7 +105,7 @@ function initInfoWindow(marker) {
         // making the content string available to be used by openIW below.
         attachListener(marker, self.content);
 
-    // Error handling
+        // Error handling
     }).fail(function () {
         alert("A problem has occurred with the foursquare api. Please refresh the page to continue.")
     });
@@ -172,12 +172,9 @@ var viewModel = function () {
     // allows list to be clickable
     // May want to move to the other infowindow open section
     // to allow for use of 'self.content(?)'
-    self.openIW = function(location) {
-        console.log("input is: " + location.marker.title)
+    self.openIW = function (location) {
         var marker = location.marker;
-        // TODO: Don't remake content, use other function.
-        // This should only **open** infoWindows;
-        //infoWindow.setContent(location.marker.title);
+        infoWindow.setContent(marker.title);
         //infoWindow.open(location.marker.map, location.marker);
         //initInfoWindow(marker);
         infoWindow.open(marker.map, marker);
