@@ -91,17 +91,10 @@ function initInfoWindow(marker) {
         //self.address = result.location.formattedAddress[0] || 'No location provided';
         self.city = result.location.formattedAddress[1] || 'No city provided';
 
-        // See if this still works, can't seem to find any numbers
-        try {
-            self.contact = result.contact.phone;
-        } catch (err) {
-            self.contact = 'No phone number provided';
-        }
-
         // Set content to be delivered to the attachListener function
-        self.content = "<div><b>" + self.name + "</b></div>" + "<div><b>" + self.address + "</b></div>" + "<div><b>" + self.city + "</b></div>" + "<div><b>" + self.contact + "</b></div>";
+        self.content = "<div><b>" + self.name + "</b></div>" + "<div><b>" + self.address + "</b></div>" + "<div><b>" + self.city + "</b></div>";
 
-        // Make it so that initInfoWindow is called by attachListener to get the content string, thus 
+        // Make it so that initInfoWindow is called by attachListener to get the content string, thus
         // making the content string available to be used by openIW below.
         attachListener(marker, self.content);
 
