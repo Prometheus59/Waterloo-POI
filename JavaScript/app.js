@@ -153,13 +153,14 @@ var viewModel = function () {
     // Allows list to be clickable
     self.openIW = function (location) {
         var marker = location.marker;
-        infoWindow.setContent(marker.title);
-        infoWindow.open(marker.map, marker);
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function () {
-            marker.setAnimation(null);
-        }, 1450);
+        google.maps.event.trigger(marker, 'click' );
     };
+};
+
+googleError = function googleError() {
+    alert(
+        'Google Maps did not load correctly. Please refresh the page to try again.'
+    );
 };
 
 function initApp() {
